@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% import "bootstrap_wtf.html" as wtf %}
+
+{% block content %}
+    
+
+    <div class="row">
+        {% set explore_type = 'settings' %}
+        {% include 'explore/_explore_nav.html' %}
+    </div>
+    <hr class="border border-success border-3 opacity-75">
+
+    <div class="row mb-3">
+        {% include 'explore/_search_form.html' %}
+    </div>
+
+    {% if username %}
+    <h2>{{current_user.username}}'s Campaign Settings</h2>
+    {% else %}
+    <h2>Campaign Settings</h2>
+    {% endif %}
+    <div class="row mb-3">
+        {% for setting in settings %}
+            {% include 'explore/_setting.html' %}
+        {% endfor %}
+    </div>
+    {% include '_pagination_buttons.html' %}
+    
+
+{% endblock %}

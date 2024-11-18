@@ -1,0 +1,2 @@
+FLASK_APP=campaign_tracker.py
+FLASK_DEBUG=1

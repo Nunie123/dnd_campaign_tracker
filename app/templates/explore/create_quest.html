@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ form_type }} a Quest</h1>
+
+    <div class="col-6">
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+
+            {{ form.name.label(class_='form-label') }}<span class="text-danger-emphasis">*</span>
+            {{ form.name(class_='form-control') }}
+            {% for error in form.name.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <br>
+
+            {{ form.short_description.label(class_='form-label') }}<span class="text-danger-emphasis">*</span>
+            {{ form.short_description(class_='form-control') }}
+            {% for error in form.short_description.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <br>
+
+            {{ form.long_description.label(class_='form-label') }}
+            {{ form.long_description(class_='form-control') }}
+            {% for error in form.long_description.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <br>
+
+            {{ form.quest_giver.label(class_='form-label') }}
+            {{ form.quest_giver(class_='form-control') }}
+            {% for error in form.quest_giver.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <br>
+
+            {{ form.reward.label(class_='form-label') }}
+            {{ form.reward(class_='form-control') }}
+            {% for error in form.reward.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <br>
+
+            {{ form.campaign.label(class_='form-label') }}<span class="text-danger-emphasis">*</span>
+            {{ form.campaign(class_='form-control') }}
+            {% for error in form.campaign.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <br>
+
+            <p class="text-danger-emphasis">*required</p>
+
+            {{ form.submit(class_='btn btn-success') }}
+            
+        </form>
+    </div>
+{% endblock %}

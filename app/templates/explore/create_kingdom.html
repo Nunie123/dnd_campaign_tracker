@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ form_type }} a Kingdom</h1>
+
+    <div class="col-6">
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+
+            {{ form.name.label(class_='form-label') }}<span class="text-danger-emphasis">*</span>
+            {{ form.name(class_='form-control') }}
+            {% for error in form.name.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <br>
+
+            {{ form.short_description.label(class_='form-label') }}<span class="text-danger-emphasis">*</span>
+            {{ form.short_description(class_='form-control') }}
+            {% for error in form.short_description.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <br>
+
+            {{ form.long_description.label(class_='form-label') }}
+            {{ form.long_description(class_='form-control') }}
+            {% for error in form.long_description.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <br>
+
+            {{ form.ruler.label(class_='form-label') }}
+            {{ form.ruler(class_='form-control') }}
+            {% for error in form.ruler.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <br>
+
+            {{ form.geography_description.label(class_='form-label') }}
+            {{ form.geography_description(class_='form-control') }}
+            {% for error in form.geography_description.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <br>
+
+            {{ form.demographics_description.label(class_='form-label') }}
+            {{ form.demographics_description(class_='form-control') }}
+            {% for error in form.demographics_description.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <br>
+
+            {{ form.political_description.label(class_='form-label') }}
+            {{ form.political_description(class_='form-control') }}
+            {% for error in form.political_description.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <br>
+
+            {{ form.economy_description.label(class_='form-label') }}
+            {{ form.economy_description(class_='form-control') }}
+            {% for error in form.economy_description.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <br>
+
+            {{ form.history_description.label(class_='form-label') }}
+            {{ form.history_description(class_='form-control') }}
+            {% for error in form.history_description.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <br>
+
+            {{ form.setting.label(class_='form-label') }}<span class="text-danger-emphasis">*</span>
+            {{ form.setting(class_='form-control') }}
+            {% for error in form.setting.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <br>
+            <p class="text-danger-emphasis">*required</p>
+
+            {{ form.submit(class_='btn btn-success') }}
+            
+        </form>
+    </div>
+{% endblock %}

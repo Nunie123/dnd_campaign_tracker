@@ -1,0 +1,12 @@
+
+<!-- TODO: serve URLs from S3 or a CDN -->
+{% set url = 'explore.view_{}_details'.format(carousel_type) %}
+<img src="{{url_for('static', filename='images/default_campaign.jpeg')}}" class="d-block w-100" alt="A castle among cliffs surrounded by water.">
+<div class="carousel-caption d-none d-md-block">
+    <div class="d-grid gap-2 col mx-auto">
+        <a href="{{ url_for(url, id=item.id) }}" class="btn btn-light opacity-50" type="button">
+            <div class="fs-1 mb-4">{{ item.name }}</div>
+            <div class="fs-5">{{ item.short_description }}</div>
+        </a>
+    </div>
+</div>

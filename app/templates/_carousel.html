@@ -1,0 +1,28 @@
+<div id="{{ carousel_type }}" class="carousel slide">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#{{ carousel_type }}" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        {% for _ in items[1:] %}
+            {% set slide_index = loop.index + 1 %}
+            <button type="button" data-bs-target="#{{ carousel_type }}" data-bs-slide-to="{{ loop.index }}" aria-label="Slide {{ slide_index }}"></button>
+        {% endfor %}
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            {% set item = items[0] %}
+            {% include '_carousel_item.html' %}
+        </div>
+        {% for item in items[1:] %}
+        <div class="carousel-item">
+            {% include '_carousel_item.html' %}
+        </div>
+        {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#{{ carousel_type }}" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#{{ carousel_type }}" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>

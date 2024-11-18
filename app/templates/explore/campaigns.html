@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+    
+
+    <div class="row">
+        {% set explore_type = 'campaigns' %}
+        {% include 'explore/_explore_nav.html' %}
+    </div>
+    <hr class="border border-success border-3 opacity-75">
+
+    <div class="row mb-3">
+        {% include 'explore/_search_form.html' %}
+        {% if username %}
+        <div class="col">
+            <a class="btn btn-success" href="{{ url_for('main.create_campaign') }}">Create New Campaign</a>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if username %}
+    <h2>{{current_user.username}}'s Campaigns</h2>
+    {% else %}
+    <h2>Campaigns</h2>
+    {% endif %}
+    <div class="container text-center mb-3">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for campaign in campaigns %}
+                    {% include 'explore/_campaign.html' %}
+                {% endfor %}
+        </div>
+    </div>
+    {% include '_pagination_buttons.html' %}
+    
+
+{% endblock %}

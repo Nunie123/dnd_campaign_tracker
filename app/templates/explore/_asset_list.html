@@ -1,0 +1,29 @@
+
+
+
+<div class="col">
+    <div class="card h-100">
+        <a href="{{ url_for(asset_details_route, id=asset.id) }}">
+            <!-- TODO: update image link -->
+            <img src="{{url_for('static', filename='images/default_campaign.jpeg')}}" class="card-img-top" alt="Castle by lake">
+        </a>
+        <div class="card-body">
+            <a class="btn btn-outline-success w-100 fs-4" href="{{ url_for(asset_details_route, id=asset.id) }}">
+                {{ asset.name }}
+            </a>
+
+            {% if asset.setting %}
+            <div>
+                <span class="fs-6 text-body-secondary opacity-75">setting: </span>
+                <a class="fs-5" href="{{ url_for('explore.view_setting_details', id=asset.setting.id) }}">{{ asset.setting.name }}</a>
+            </div>
+            {% endif %}
+            <div>
+                <span class="fs-6 text-body-secondary opacity-75">created by: </span>
+                <a class="fs-5" href="{{ url_for('main.user', username=asset.owner.username) }}">{{ asset.owner.username }}</a>
+            </div>
+            <p class="card-text">{{ asset.short_description }}</p>
+            <!-- TODO: button to copy asset to user's account -->
+        </div>
+    </div>
+</div>

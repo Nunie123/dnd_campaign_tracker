@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>{{ user.username }}</h2>
+<div class="row">
+    <div class="col">
+        <img src="{{url_for('static', filename='images/default_user.jpeg')}}" class="d-block w-100" alt="A woman in armor staring into the distance.">
+    </div>
+    <div class="col">
+
+        {% if current_user.id == user.id %}
+        <a class="btn btn-outline-success" href="{{ url_for('main.edit_profile') }}">Edit Profile</a>
+        {% endif %}
+
+        <div class="row mb-4">
+            <div class="col-2 fs-6 text-body-secondary opacity-75">
+                Username
+            </div>
+            <div class="col">
+                {{ user.username }}
+            </div>
+        </div>
+
+        {% if current_user.id == user.id %}
+        <div class="row mb-4">
+            <div class="col-2 fs-6 text-body-secondary opacity-75">
+                Email
+            </div>
+            <div class="col">
+                {{ user.email }} <span class="fs-6 text-body-secondary opacity-75">(visible only to you)</span>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="row mb-4">
+            <div class="col-2 fs-6 text-body-secondary opacity-75">
+                About Me
+            </div>
+            <div class="col">
+                {{ user.about_me }}
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-2 fs-6 text-body-secondary opacity-75">
+                Last Seen
+            </div>
+            <div class="col">
+                {{ moment(user.last_seen).format('LLL') }}
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-2 fs-6 text-body-secondary opacity-75">
+                Campaigns
+            </div>
+            <div class="col">
+                {% if user.campaigns %}
+                {% for campaign in user.campaigns %}
+                <a class="fs-5" href="{{ url_for('explore.view_campaign_details', id=campaign.id) }}">{{ campaign.name }}</a>
+                <br>
+                {% endfor %}
+                {% else %}
+                None
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-2 fs-6 text-body-secondary opacity-75">
+                Settings
+            </div>
+            <div class="col">
+                {% if user.settings %}
+                {% for setting in user.settings %}
+                <a class="fs-5" href="{{ url_for('explore.view_setting_details', id=setting.id) }}">{{ setting.name }}</a>
+                <br>
+                {% endfor %}
+                {% else %}
+                None
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-2 fs-6 text-body-secondary opacity-75">
+                Kingdoms
+            </div>
+            <div class="col">
+                {% if user.kingdoms %}
+                {% for kingdom in user.kingdoms %}
+                <a class="fs-5" href="{{ url_for('explore.view_kingdom_details', id=kingdom.id) }}">{{ kingdom.name }}</a>
+                <br>
+                {% endfor %}
+                {% else %}
+                None
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-2 fs-6 text-body-secondary opacity-75">
+                City
+            </div>
+            <div class="col">
+                {% if user.cities %}
+                {% for city in user.cities %}
+                <a class="fs-5" href="{{ url_for('explore.view_city_details', id=city.id) }}">{{ city.name }}</a>
+                <br>
+                {% endfor %}
+                {% else %}
+                None
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-2 fs-6 text-body-secondary opacity-75">
+                Points of Interest
+            </div>
+            <div class="col">
+                {% if user.points_of_interest %}
+                {% for point_of_interest in user.points_of_interest %}
+                <a class="fs-5" href="{{ url_for('explore.view_point_of_interest_details', id=point_of_interest.id) }}">{{ point_of_interest.name }}</a>
+                <br>
+                {% endfor %}
+                {% else %}
+                None
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-2 fs-6 text-body-secondary opacity-75">
+                Quests
+            </div>
+            <div class="col">
+                {% if user.quests %}
+                {% for quest in user.quests %}
+                <a class="fs-5" href="{{ url_for('explore.view_quest_details', id=quest.id) }}">{{ quest.name }}</a>
+                <br>
+                {% endfor %}
+                {% else %}
+                None
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-2 fs-6 text-body-secondary opacity-75">
+                Encounters
+            </div>
+            <div class="col">
+                {% if user.encounters %}
+                {% for encounter in user.encounters %}
+                <a class="fs-5" href="{{ url_for('explore.view_encounter_details', id=encounter.id) }}">{{ encounter.name }}</a>
+                <br>
+                {% endfor %}
+                {% else %}
+                None
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- 
+    <table class="table table-hover">
+        <tr>
+            <td width="256px"><img src="{{ user.avatar(256) }}"></td>
+            <td>
+                <h1>{{ _('User') }}: {{ user.username }}</h1>
+                {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+                {% if user.last_seen %}
+                <p>{{ _('Last seen on') }}: {{ moment(user.last_seen).format('LLL') }}</p>
+                {% endif %}
+                <p>{{ _('%(count)d followers', count=user.followers_count()) }}, {{ _('%(count)d following', count=user.following_count()) }}</p>
+                {% if user == current_user %}
+                <p><a href="{{ url_for('main.edit_profile') }}">{{ _('Edit your profile') }}</a></p>
+                {% elif not current_user.is_following(user) %}
+                <p>
+                    <form action="{{ url_for('main.follow', username=user.username) }}" method="post">
+                        {{ form.hidden_tag() }}
+                        {{ form.submit(value=_('Follow'), class_='btn btn-primary') }}
+                    </form>
+                </p>
+                {% else %}
+                <p>
+                    <form action="{{ url_for('main.unfollow', username=user.username) }}" method="post">
+                        {{ form.hidden_tag() }}
+                        {{ form.submit(value=_('Unfollow'), class_='btn btn-primary') }}
+                    </form>
+                </p>
+                {% endif %}
+            </td>
+        </tr>
+    </table> -->
+{% endblock %}

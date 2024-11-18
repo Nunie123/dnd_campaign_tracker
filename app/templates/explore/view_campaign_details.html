@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% set asset_type="campaign" %}
+
+<div class="row">
+    <div class="col">
+
+        <div class="row mb-4">
+            <div class="col-2 fs-6 text-body-secondary opacity-75">
+                Campaign
+            </div>
+            <div class="col">
+                <h2>{{ asset.name }}</h2>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-2 fs-6 text-body-secondary opacity-75">
+                Created by
+            </div>
+            <div class="col">
+                <a class="fs-5" href="{{ url_for('main.user', username=asset.owner.username) }}">{{ asset.owner.username }}</a>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-2 fs-6 text-body-secondary opacity-75">
+                Tagline
+            </div>
+            <div class="col">
+                {{ asset.short_description }}
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-2 fs-6 text-body-secondary opacity-75">
+                Setting
+            </div>
+            <div class="col">
+                {% if asset.setting %}
+                <a class="fs-5" href="{{ url_for('explore.view_setting_details', id=asset.setting.id) }}">{{ asset.setting.name }}</a>
+                {% else %}
+                None
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-2 fs-6 text-body-secondary opacity-75">
+                Description
+            </div>
+            <div class="col">
+                {{ asset.long_description }}
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-2 fs-6 text-body-secondary opacity-75">
+                Quests
+            </div>
+            <div class="col">
+                {% if asset.quests %}
+                {% for quest in asset.quests %}
+                <a class="fs-5" href="{{ url_for('explore.view_quest_details', id=quest.id) }}">{{ quest.name }}</a>
+                <br>
+                {% endfor %}
+                {% else %}
+                None
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-2 fs-6 text-body-secondary opacity-75">
+                Encounters
+            </div>
+            <div class="col">
+                {% if asset.encounters %}
+                {% for encounter in asset.encounters %}
+                <a class="fs-5" href="{{ url_for('explore.view_encounter_details', id=encounter.id) }}">{{ encounter.name }}</a>
+                <br>
+                {% endfor %}
+                {% else %}
+                None
+                {% endif %}
+            </div>
+        </div>
+
+        {% if current_user == asset.owner %}
+        <div class="row mb-4">
+            <div class="col">
+                <a class="btn btn-outline-success" href="{{ url_for('explore.edit_campaign', id=asset.id) }}">Edit This Campaign</a>
+            </div>
+            <div class="col">
+                <form action="{{ url_for('explore.delete_asset', asset_type=asset_type, id=asset.id) }}" method="post">
+                    {{ form.hidden_tag() }}
+                    {{ form.submit(value='Delete this Campaign', class_="btn btn-outline-danger") }}
+                </form>
+            </div>
+        </div>
+        {% else %}
+        <div class="row mb-4">
+            <div class="col">
+                <form action="{{ url_for('explore.copy_asset', asset_type=asset_type, id=asset.id) }}" method="post">
+                    {{ form.hidden_tag() }}
+                    {{ form.submit(value='Copy this Campaign to my account', class_="btn btn-outline-success") }}
+                </form>
+            </div>
+        </div>
+        {% endif %}
+        
+    </div>
+    <div class="col">
+        <img src="{{url_for('static', filename='images/default_campaign.jpeg')}}" class="d-block w-100" alt="A castle among cliffs surrounded by water.">
+    </div>
+</div>
+
+
+{% endblock %}

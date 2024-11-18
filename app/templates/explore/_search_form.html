@@ -1,0 +1,13 @@
+
+    <div class="col-6">
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="input-group">
+                {{ form.search_term(class_='form-control') }}
+                {{ form.submit(class_='btn btn-outline-success') }}
+            </div>
+            {% for error in form.search_term.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </form>
+    </div>

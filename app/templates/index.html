@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% import "bootstrap_wtf.html" as wtf %}
+
+{% block content %}
+
+    <div id="introduction" class="row align-items-center text-center bg-success-subtle bg-gradient rounded py-2 mx-2">
+        <div class="col">
+            <h3>
+                Your resource for building, tracking, and sharing your custom campaigns, settings, and more!
+            </h3>
+            <br>
+            <div class="d-grid gap-2 col-8 mx-auto">
+                <a href="{{ url_for('explore.view_assets', asset_type='campaign') }}" class="btn btn-success" type="button">Explore Campaigns and Settings</a>
+                {% if current_user.is_anonymous %}
+                <a href="{{ url_for('auth.login') }}" class="btn btn-success" type="button">Sign Up and Create Your Own!</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col">
+            <div id="carouselIntro" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval="10000">
+                        <img src="{{url_for('static', filename='images/default_campaign.jpeg')}}" class="d-block w-100" alt="Castle over a lake.">
+                    </div>
+                    <div class="carousel-item" data-bs-interval="2000">
+                        <img src="{{url_for('static', filename='images/default_setting.jpeg')}}" class="d-block w-100" alt="Fantasy map">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselIntro" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselIntro" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <hr class="border border-success border-3 opacity-75">
+
+    <h3 class="text-center my-5">Community Campaigns and Settings</h3>
+    <div id="campaigns-and-settings-slides" class="row">
+        {% if campaigns %}
+        <div class="col">
+            <h4>Campaigns</h4>
+            {% set items = campaigns %}
+            {% set carousel_type = 'campaign' %}
+            {% include '_carousel.html' %}
+        </div>
+        {% endif %}
+        {% if settings %}
+        <div class="col">
+            <h4>Settings</h4>
+            {% set items = settings %}
+            {% set carousel_type = 'setting' %}
+            {% include '_carousel.html' %}
+        </div>
+        {% endif %}
+
+    </div>
+
+{% endblock %}

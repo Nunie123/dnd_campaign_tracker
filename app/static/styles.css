@@ -1,0 +1,25 @@
+
+.carousel-caption {
+    top: 0;
+    bottom: auto;
+    left: 5%;
+    right: 5%;
+}
+
+.carousel-control-next, .carousel-control-prev {
+    width: 5%
+}
+
+.nav-pills {
+    --bs-nav-pills-link-active-bg: #8ccf7d;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: green;
+    background-color: whitesmoke;
+    border: 3px solid green;
+}
+
+.nav-pills .nav-link {
+    color: green;
+}

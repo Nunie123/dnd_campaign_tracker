@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ form_type }} a Campaign</h1>
+
+    <div class="col-6">
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+
+            {{ form.name.label(class_='form-label') }}<span class="text-danger-emphasis">*</span>
+            {{ form.name(class_='form-control') }}
+            {% for error in form.name.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <br>
+
+            {{ form.short_description.label(class_='form-label') }}<span class="text-danger-emphasis">*</span>
+            {{ form.short_description(class_='form-control') }}
+            {% for error in form.short_description.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <br>
+
+            {{ form.long_description.label(class_='form-label') }}
+            {{ form.long_description(class_='form-control') }}
+            {% for error in form.long_description.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <br>
+
+            {{ form.setting.label(class_='form-label') }}<span class="text-danger-emphasis">*</span>
+            {{ form.setting(class_='form-control') }}
+            {% for error in form.setting.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <br>
+            <p class="text-danger-emphasis">*required</p>
+
+            {{ form.submit(class_='btn btn-success') }}
+            
+        </form>
+    </div>
+{% endblock %}
