@@ -15,7 +15,7 @@ from app.models import (
     Kingdom,
     City,
     PointOfInterest,
-    Quest,
+    Adventure,
     Encounter,
 )
 from app.explore import bp
@@ -180,15 +180,15 @@ def view_point_of_interest_details(id):
     )
 
 
-@bp.route("/quests/<id>")
-def view_quest_details(id):
+@bp.route("/adventures/<id>")
+def view_adventure_details(id):
     asset = db.one_or_404(
-        sa.select(Quest).filter(Quest.id == id, Quest.deleted_at.is_(None))
+        sa.select(Adventure).filter(Adventure.id == id, Adventure.deleted_at.is_(None))
     )
     form = EmptyForm()
     return render_template(
-        "explore/view_quest_details.html",
-        title=_(f"Quest - {asset.name}"),
+        "explore/view_adventure_details.html",
+        title=_(f"Adventure - {asset.name}"),
         asset=asset,
         form=form,
     )
@@ -332,10 +332,10 @@ def create_point_of_interest():
     return create_asset("point_of_interest")
 
 
-@bp.route("/quests/create", methods=["GET", "POST"])
+@bp.route("/adventures/create", methods=["GET", "POST"])
 @login_required
-def create_quest():
-    return create_asset("quest")
+def create_adventure():
+    return create_asset("adventure")
 
 
 @bp.route("/encounters/create", methods=["GET", "POST"])
@@ -613,10 +613,10 @@ def edit_point_of_interest(id):
     )
 
 
-@bp.route("/quests/<id>/edit", methods=["GET", "POST"])
+@bp.route("/adventures/<id>/edit", methods=["GET", "POST"])
 @login_required
-def edit_quest(id):
-    asset_details = get_asset_type_details("quest")
+def edit_adventure(id):
+    asset_details = get_asset_type_details("adventure")
     model = asset_details["model"]
     asset = db.one_or_404(
         sa.Select(model).filter(model.id == id, model.deleted_at.is_(None))
@@ -626,7 +626,7 @@ def edit_quest(id):
         return redirect(
             url_for(
                 "explore.view_assets",
-                asset_type="campaign",
+                asset_type="adventure",
                 username=current_user.username,
             )
         )
@@ -644,8 +644,8 @@ def edit_quest(id):
         asset.campaign_id = form.campaign.data
         asset.updated_at = datetime.now(timezone.utc)
         db.session.commit()
-        flash(_(f"Your Quest has been updated."))
-        return redirect(url_for("explore.view_quest_details", id=asset.id))
+        flash(_(f"Your Adventure has been updated."))
+        return redirect(url_for("explore.view_adventure_details", id=asset.id))
     elif request.method == "GET":
         form.name.data = asset.name
         form.short_description.data = asset.short_description
@@ -653,10 +653,10 @@ def edit_quest(id):
         form.quest_giver.data = asset.quest_giver
         form.reward.data = asset.reward
         form.campaign.data = asset.campaign_id
-        form.submit.label.text = "Update Quest"
+        form.submit.label.text = "Update Adventure"
     return render_template(
         asset_details["create_url"],
-        title=_("Edit Quest"),
+        title=_("Edit Adventure"),
         form=form,
         form_type="Edit",
     )

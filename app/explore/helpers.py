@@ -8,7 +8,7 @@ from app.models import (
     Kingdom,
     City,
     PointOfInterest,
-    Quest,
+    Adventure,
     Encounter,
     User,
 )
@@ -18,7 +18,7 @@ from app.explore.forms import (
     CreateEncounterForm,
     CreateKingdomForm,
     CreatePointOfInterestForm,
-    CreateQuestForm,
+    CreateAdventureForm,
     CreateSettingForm,
 )
 
@@ -116,10 +116,10 @@ def get_asset_type_details(asset_type: str):
             "create_form": CreatePointOfInterestForm,
             "create_url": "explore/create_point_of_interest.html",
         },
-        "quest": {
-            "model": Quest,
-            "create_form": CreateQuestForm,
-            "create_url": "explore/create_quest.html",
+        "adventure": {
+            "model": Adventure,
+            "create_form": CreateAdventureForm,
+            "create_url": "explore/create_adventure.html",
         },
         "encounter": {
             "model": Encounter,

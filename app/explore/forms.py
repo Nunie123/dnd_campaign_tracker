@@ -136,7 +136,7 @@ class CreatePointOfInterestForm(FlaskForm):
     submit = SubmitField(_l("Submit"))
 
 
-class CreateQuestForm(FlaskForm):
+class CreateAdventureForm(FlaskForm):
     name = StringField(_l("Name"), validators=[DataRequired(), Length(min=1, max=64)])
     short_description = StringField(
         _l("Tagline (1-3 sentence description)"),
@@ -151,7 +151,7 @@ class CreateQuestForm(FlaskForm):
         validators=[Optional(), Length(min=1, max=128)],
     )
     reward = StringField(
-        _l("Reward for Completing Quest"),
+        _l("Reward for Completing Adventure"),
         validators=[Optional(), Length(min=1, max=256)],
     )
 

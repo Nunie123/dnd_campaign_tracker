@@ -42,7 +42,7 @@ class User(UserMixin, db.Model):
     points_of_interest: so.Mapped[List["PointOfInterest"]] = so.relationship(
         back_populates="owner"
     )
-    quests: so.Mapped[List["Quest"]] = so.relationship(back_populates="owner")
+    adventures: so.Mapped[List["Adventure"]] = so.relationship(back_populates="owner")
     encounters: so.Mapped[List["Encounter"]] = so.relationship(back_populates="owner")
     religions: so.Mapped[List["Religion"]] = so.relationship(back_populates="owner")
 
@@ -209,7 +209,9 @@ class Campaign(db.Model):
         sa.ForeignKey(Setting.id), index=True, nullable=True
     )
 
-    quests: so.Mapped[List["Quest"]] = so.relationship(back_populates="campaign")
+    adventures: so.Mapped[List["Adventure"]] = so.relationship(
+        back_populates="campaign"
+    )
     encounters: so.Mapped[List["Encounter"]] = so.relationship(
         back_populates="campaign"
     )
@@ -423,7 +425,7 @@ class Session(db.Model):
         return "<Session {}>".format(self.session_date)
 
 
-class Quest(db.Model):
+class Adventure(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
 
     name: so.Mapped[str] = so.mapped_column(sa.String(64))
@@ -443,16 +445,16 @@ class Quest(db.Model):
     )
     deleted_at: so.Mapped[datetime] = so.mapped_column(sa.DateTime, nullable=True)
 
-    owner: so.Mapped[User] = so.relationship(back_populates="quests")
+    owner: so.Mapped[User] = so.relationship(back_populates="adventures")
     owner_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id), index=True)
 
-    campaign: so.Mapped[Campaign] = so.relationship(back_populates="quests")
+    campaign: so.Mapped[Campaign] = so.relationship(back_populates="adventures")
     campaign_id: so.Mapped[int] = so.mapped_column(
         sa.ForeignKey(Campaign.id), index=True, nullable=True
     )
 
     def __repr__(self):
-        return "<Quest {}>".format(self.name)
+        return "<Adventure {}>".format(self.name)
 
 
 class Encounter(db.Model):

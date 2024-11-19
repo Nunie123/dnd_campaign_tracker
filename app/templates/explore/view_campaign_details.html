@@ -58,12 +58,12 @@
 
         <div class="row mb-4">
             <div class="col-2 fs-6 text-body-secondary opacity-75">
-                Quests
+                Adventures
             </div>
             <div class="col">
-                {% if asset.quests %}
-                {% for quest in asset.quests %}
-                <a class="fs-5" href="{{ url_for('explore.view_quest_details', id=quest.id) }}">{{ quest.name }}</a>
+                {% if asset.adventures %}
+                {% for adventure in asset.adventures %}
+                <a class="fs-5" href="{{ url_for('explore.view_adventure_details', id=adventure.id) }}">{{ adventure.name }}</a>
                 <br>
                 {% endfor %}
                 {% else %}

@@ -2,14 +2,14 @@
 
 {% block content %}
 
-{% set asset_type="quest" %}
+{% set asset_type="adventure" %}
 
 <div class="row">
     <div class="col">
 
         <div class="row mb-4">
             <div class="col-2 fs-6 text-body-secondary opacity-75">
-                Quest
+                Adventure
             </div>
             <div class="col">
                 <h2>{{ asset.name }}</h2>
@@ -77,12 +77,12 @@
         {% if current_user == asset.owner %}
         <div class="row mb-4">
             <div class="col">
-                <a class="btn btn-outline-success" href="{{ url_for('explore.edit_quest', id=asset.id) }}">Edit this Quest</a>
+                <a class="btn btn-outline-success" href="{{ url_for('explore.edit_adventure', id=asset.id) }}">Edit this Adventure</a>
             </div>
             <div class="col">
                 <form action="{{ url_for('explore.delete_asset', asset_type=asset_type, id=asset.id) }}" method="post">
                     {{ form.hidden_tag() }}
-                    {{ form.submit(value='Delete this Quest', class_="btn btn-outline-danger") }}
+                    {{ form.submit(value='Delete this Adventure', class_="btn btn-outline-danger") }}
                 </form>
             </div>
         </div>
@@ -91,7 +91,7 @@
             <div class="col">
                 <form action="{{ url_for('explore.copy_asset', asset_type=asset_type, id=asset.id) }}" method="post">
                     {{ form.hidden_tag() }}
-                    {{ form.submit(value='Copy this Quest to my account', class_="btn btn-outline-success") }}
+                    {{ form.submit(value='Copy this Adventure to my account', class_="btn btn-outline-success") }}
                 </form>
             </div>
         </div>

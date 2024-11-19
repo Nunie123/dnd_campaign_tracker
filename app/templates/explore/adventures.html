@@ -5,7 +5,7 @@
     
 
     <div class="row">
-        {% set explore_type = 'quests' %}
+        {% set asset_type = 'adventures' %}
         {% include 'explore/_explore_nav.html' %}
     </div>
     <hr class="border border-success border-3 opacity-75">
@@ -15,13 +15,13 @@
     </div>
 
     {% if username %}
-    <h2>{{current_user.username}}'s Quests</h2>
+    <h2>{{current_user.username}}'s Adventures</h2>
     {% else %}
-    <h2>Quests</h2>
+    <h2>Adventures</h2>
     {% endif %}
     <div class="row mb-3">
-        {% for quest in quests %}
-            {% include 'explore/_quests.html' %}
+        {% for adventure in adventures %}
+            {% include 'explore/_adventures.html' %}
         {% endfor %}
     </div>
     {% include '_pagination_buttons.html' %}
