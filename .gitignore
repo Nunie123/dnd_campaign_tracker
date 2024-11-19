@@ -2,7 +2,6 @@ venv
 __pycache__
 .flaskenv
 .env
-migrations/
 *.db
 .DS_Store
 *.log
