@@ -17,3 +17,8 @@
 3. docker build -t cantrip/flask .
 4. docker tag cantrip/flask:latest 491085388902.dkr.ecr.us-west-2.amazonaws.com/cantrip/flask:latest
 5. docker push 491085388902.dkr.ecr.us-west-2.amazonaws.com/cantrip/flask:latest
+
+
+## Run Docker Image Locally
+1. docker build -t cantrip/flask .
+2. docker run -p 5001:5000 cantrip/flask
