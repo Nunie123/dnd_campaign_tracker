@@ -22,9 +22,7 @@ def get_creds(secret_id: str) -> dict:
 def create_database_uri() -> str:
     if os.environ.get("ENV") == "PROD":
         creds = get_creds("prod/db-admin-creds")
-        uri = (
-            f"mysql+pymysql://{creds['username']}:{creds['password']}@{creds['host']}/"
-        )
+        uri = f"mysql+pymysql://{creds['username']}:{creds['password']}@{creds['host']}:{creds['port']}/{creds['database']}"
     else:
         uri = "sqlite:///" + os.path.join(basedir, "app.db")
     return uri
@@ -42,18 +40,3 @@ class Config:
     POSTS_PER_PAGE = 25
     LANGUAGES = ["en", "es"]
     MS_TRANSLATOR_KEY = os.environ.get("MS_TRANSLATOR_KEY")
-
-
-from sqlalchemy import create_engine
-from sqlalchemy import text
-
-creds = {
-    "username": "admin",
-    "password": "s$E}WxHfDfD%iZ5jX3ExPXbT#5Zz",
-    "host": "db-prod-1.czgieuo4ido7.us-west-2.rds.amazonaws.com",
-}
-
-uri = f"mysql+pymysql://{creds['username']}:{creds['password']}@{creds['host']}:3306/"
-engine = create_engine(uri)
-conn = engine.connect()
-result = conn.execute(text("select 1"))
