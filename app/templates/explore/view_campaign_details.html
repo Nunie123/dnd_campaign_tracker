@@ -56,6 +56,17 @@
             </div>
         </div>
 
+        {% if current_user == asset.owner %}
+        <div class="row mb-4">
+            <div class="col-2 fs-6 text-body-secondary opacity-75">
+                Game Master Notes (only visible to you)
+            </div>
+            <div class="col">
+                {{ asset.gm_notes }}
+            </div>
+        </div>
+        {% endif %}
+
         <div class="row mb-4">
             <div class="col-2 fs-6 text-body-secondary opacity-75">
                 Adventures

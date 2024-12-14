@@ -188,7 +188,8 @@ class Campaign(db.Model):
 
     name: so.Mapped[str] = so.mapped_column(sa.String(64))
     short_description: so.Mapped[str] = so.mapped_column(sa.String(128))
-    long_description: so.Mapped[str] = so.mapped_column(sa.String(1028), nullable=True)
+    long_description: so.Mapped[str] = so.mapped_column(sa.String(2000), nullable=True)
+    gm_notes: so.Mapped[str] = so.mapped_column(sa.String(2000), nullable=True)
 
     language: so.Mapped[Optional[str]] = so.mapped_column(sa.String(5), nullable=True)
 

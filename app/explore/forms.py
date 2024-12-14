@@ -29,7 +29,11 @@ class CreateCampaignForm(FlaskForm):
     )
     long_description = TextAreaField(
         _l("Description"),
-        validators=[Optional(), Length(min=0, max=1028)],
+        validators=[Optional(), Length(min=0, max=2000)],
+    )
+    gm_notes = TextAreaField(
+        _l("GM Notes (only visible to you)"),
+        validators=[Optional(), Length(min=0, max=2000)],
     )
     setting = SelectField(_l("Setting", coerce=int))
     submit = SubmitField(_l("Create Campaign"))

@@ -28,6 +28,13 @@
             {% endfor %}
             <br>
 
+            {{ form.gm_notes.label(class_='form-label') }}
+            {{ form.gm_notes(class_='form-control') }}
+            {% for error in form.gm_notes.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <br>
+
             {{ form.setting.label(class_='form-label') }}<span class="text-danger-emphasis">*</span>
             {{ form.setting(class_='form-control') }}
             {% for error in form.setting.errors %}
