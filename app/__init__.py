@@ -18,7 +18,7 @@ def get_locale():
 db = SQLAlchemy()
 migrate = Migrate()
 login = LoginManager()
-login.login_view = "auth.login"
+login.login_view = "users.login"
 login.login_message = _l("Please log in to access this page.")
 mail = Mail()
 moment = Moment()
@@ -40,21 +40,13 @@ def create_app(config_class=Config):
 
     app.register_blueprint(errors_bp)
 
-    from app.auth import bp as auth_bp
+    from app.users import bp as users_bp
 
-    app.register_blueprint(auth_bp, url_prefix="/auth")
+    app.register_blueprint(users_bp, url_prefix="/users")
 
-    from app.main import bp as main_bp
+    from app.assets import bp as assets_bp
 
-    app.register_blueprint(main_bp)
-
-    from app.cli import bp as cli_bp
-
-    app.register_blueprint(cli_bp)
-
-    from app.explore import bp as explore_bp
-
-    app.register_blueprint(explore_bp)
+    app.register_blueprint(assets_bp)
 
     if not app.debug and not app.testing:
         if app.config["MAIL_SERVER"]:
