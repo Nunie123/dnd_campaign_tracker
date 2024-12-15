@@ -21,7 +21,6 @@ Flask-Migrate==4.0.5
 Flask-Moment==1.0.5
 Flask-SQLAlchemy==3.1.1
 Flask-WTF==1.2.1
-greenlet==3.0.1
 idna==3.4
 importlib_metadata==8.4.0
 itsdangerous==2.1.2
@@ -46,7 +45,7 @@ pytz==2023.3.post1
 requests==2.31.0
 s3transfer==0.10.4
 six==1.16.0
-SQLAlchemy==2.0.23
+SQLAlchemy==2.0.36
 tomli==2.0.1
 typing_extensions==4.8.0
 urllib3==1.26.20

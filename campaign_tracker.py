@@ -1,11 +1,11 @@
 import sqlalchemy as sa
 import sqlalchemy.orm as so
 from app import create_app, db
-from app.models import User, Campaign
+from app.models import User, Asset
 
 app = create_app()
 
 
 @app.shell_context_processor
 def make_shell_context():
-    return {"sa": sa, "so": so, "db": db, "User": User, "Campaign": Campaign}
+    return {"sa": sa, "so": so, "db": db, "User": User, "Asset": Asset}

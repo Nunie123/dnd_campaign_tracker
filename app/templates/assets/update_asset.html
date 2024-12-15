@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ form_type }} a Campaign</h1>
+
+    <div class="col-6">
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+
+            {% for field in form %}
+            {% if field.type != 'SubmitField' %}
+
+            {{ field.label(class_='form-label') }}
+            {{ field(class_='form-control') }}
+            {% for error in field.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <br>
+
+            {% endif %}
+            {% endfor %}
+
+            {{ form.submit(class_='btn btn-success') }}
+            
+        </form>
+    </div>
+{% endblock %}

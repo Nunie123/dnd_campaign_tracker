@@ -8,6 +8,7 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_moment import Moment
 from flask_babel import Babel, lazy_gettext as _l
+
 from config import Config
 
 
@@ -40,21 +41,21 @@ def create_app(config_class=Config):
 
     app.register_blueprint(errors_bp)
 
-    from app.auth import bp as auth_bp
+    from app.user import bp as user_bp
 
-    app.register_blueprint(auth_bp, url_prefix="/auth")
+    app.register_blueprint(user_bp, url_prefix="/user")
 
-    from app.main import bp as main_bp
+    from app.update_assets import bp as update_assets_bp
 
-    app.register_blueprint(main_bp)
+    app.register_blueprint(update_assets_bp)
 
     from app.cli import bp as cli_bp
 
     app.register_blueprint(cli_bp)
 
-    from app.explore import bp as explore_bp
+    from app.explore_assets import bp as explore_assets_bp
 
-    app.register_blueprint(explore_bp)
+    app.register_blueprint(explore_assets_bp)
 
     if not app.debug and not app.testing:
         if app.config["MAIL_SERVER"]:

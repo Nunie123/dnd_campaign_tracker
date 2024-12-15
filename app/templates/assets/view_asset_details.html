@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col">
+        {% for k, v in asset %}
+
+        <div class="row mb-4">
+            <div class="col-2 fs-6 text-body-secondary opacity-75">
+                {{ k }}
+            </div>
+            <div class="col">
+                {% if k == 'Name' %}
+                <h2>{{ v }}</h2>
+                {% elif k == 'Created By' %}
+                <a class="fs-5" href="{{ url_for('user.user', username=v.username) }}">{{ v['username'] }}</a>
+                {% elif k in ['Setting', 'Adventure', 'Campaign', 'Kingdom'] %}
+                <a class="fs-5" href="{{ url_for('explore_assets.view_asset_details', id=v['id']) }}">{{ v['name'] }}</a>
+                {% elif k == 'GM Notes (only visible to you)' and current_user != asset['Created By'] %}
+                {% continue %}
+                {% else %}
+                {{ asset.short_description }}
+                {% endif %}
+            </div>
+        </div>
+
+        {% endif %}
+
+
+        {% if current_user == asset.owner or current_user.is_admin %}
+        <div class="row mb-4">
+            <div class="col">
+                <a class="btn btn-outline-success" href="{{ url_for('update_assets.edit_asset', id=asset.id) }}">Edit This Campaign</a>
+            </div>
+            <div class="col">
+                <form action="{{ url_for('update_assets.delete_asset', id=asset['id']) }}" method="post">
+                    {{ form.hidden_tag() }}
+                    {{ form.submit(value='Delete this {}'.format(asset['asset_type']), class_="btn btn-outline-danger") }}
+                </form>
+            </div>
+        </div>
+        {% else %}
+        <div class="row mb-4">
+            <div class="col">
+                <form action="{{ url_for('update_assets.copy_asset', id=asset['id']) }}" method="post">
+                    {{ form.hidden_tag() }}
+                    {{ form.submit(value='Copy this {} to my account'.format(asset['asset_type']), class_="btn btn-outline-success") }}
+                </form>
+            </div>
+        </div>
+        {% endif %}
+        
+    </div>
+    <div class="col">
+        <img src="{{url_for('static', filename='images/default_campaign.jpeg')}}" class="d-block w-100" alt="A castle among cliffs surrounded by water.">
+    </div>
+</div>
+
+
+{% endblock %}

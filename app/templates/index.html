@@ -10,9 +10,9 @@
             </h3>
             <br>
             <div class="d-grid gap-2 col-8 mx-auto">
-                <a href="{{ url_for('explore.view_assets', asset_type='campaign') }}" class="btn btn-success" type="button">Explore Campaigns and Settings</a>
+                <a href="{{ url_for('explore_assets.view_assets', asset_type='campaign') }}" class="btn btn-success" type="button">Explore Campaigns and Settings</a>
                 {% if current_user.is_anonymous %}
-                <a href="{{ url_for('auth.login') }}" class="btn btn-success" type="button">Sign Up and Create Your Own!</a>
+                <a href="{{ url_for('user.login') }}" class="btn btn-success" type="button">Sign Up and Create Your Own!</a>
                 {% endif %}
             </div>
         </div>
@@ -47,7 +47,7 @@
             <h4>Campaigns</h4>
             {% set items = campaigns %}
             {% set carousel_type = 'campaign' %}
-            {% include '_carousel.html' %}
+            {% include 'partials/_carousel.html' %}
         </div>
         {% endif %}
         {% if settings %}
@@ -55,7 +55,7 @@
             <h4>Settings</h4>
             {% set items = settings %}
             {% set carousel_type = 'setting' %}
-            {% include '_carousel.html' %}
+            {% include 'partials/_carousel.html' %}
         </div>
         {% endif %}
 

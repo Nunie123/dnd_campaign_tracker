@@ -9,11 +9,11 @@
     <div class="carousel-inner">
         <div class="carousel-item active">
             {% set item = items[0] %}
-            {% include '_carousel_item.html' %}
+            {% include 'partials/_carousel_item.html' %}
         </div>
         {% for item in items[1:] %}
         <div class="carousel-item">
-            {% include '_carousel_item.html' %}
+            {% include 'partials/_carousel_item.html' %}
         </div>
         {% endfor %}
     </div>
